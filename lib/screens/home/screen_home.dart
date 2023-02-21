@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wafi_test/screens/floors/floor_screen.dart';
 
 class ScreenHomePage extends StatefulWidget {
   const ScreenHomePage({Key? key}) : super(key: key);
@@ -43,7 +44,10 @@ class _ScreenHomePageState extends State<ScreenHomePage> {
                   )),
               GestureDetector(
                 onTap: () {
-                  print('RIDI DADASH VASA');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ScreenFloorPage()));
                 },
                 child: Container(
                     height: h / 18,

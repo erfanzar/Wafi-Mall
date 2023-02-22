@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BarometerProvider with ChangeNotifier {
-  double _previousReading = 0;
+  double? _previousReading;
   double _pZero = 0;
 
   double get pZero {
@@ -9,7 +9,7 @@ class BarometerProvider with ChangeNotifier {
     return _pZero;
   }
 
-  double get previousReading {
+  double? get previousReading {
     return _previousReading;
   }
 
@@ -18,7 +18,7 @@ class BarometerProvider with ChangeNotifier {
   }
 
   void resetPZeroValue() {
-    _pZero = _previousReading;
+    _pZero = _previousReading!;
     notifyListeners();
   }
 }

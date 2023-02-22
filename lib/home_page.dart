@@ -90,7 +90,8 @@ class MyHomePageState extends State<MyHomePage> {
             ),
             ElevationDifferenceStreamBuilder(
               pressureStream: stream,
-              pZero: provider.previousReading,
+              //something here
+              pZero: provider.previousReading ?? pZero,
               flickerStream: _flickerStream,
             ),
             Builder(

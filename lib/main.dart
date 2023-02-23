@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:wafi_test/home_page.dart';
+import 'package:wafi_test/views/splash_screen.dart';
 import './data/barometer_provider.dart';
 import './data/flicker_provider.dart';
 
@@ -12,14 +12,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Color.fromRGBO(246, 246, 246, 1),
-        statusBarColor: Color.fromRGBO(246, 246, 246, 1)));
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
+    // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    //     statusBarIconBrightness: Brightness.dark,
+    //     systemNavigationBarIconBrightness: Brightness.dark,
+    //     systemNavigationBarColor: Color.fromRGBO(246, 246, 246, 1),
+    //     statusBarColor: Color.fromRGBO(246, 246, 246, 1)));
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.portraitUp,
+    // ]);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: BarometerProvider()),
@@ -27,11 +27,12 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'ElevaTorr',
         theme: ThemeData(
+          primaryColor: Colors.cyan,
+          scaffoldBackgroundColor: const Color(0xff040951),
           primarySwatch: Colors.blue,
         ),
-        home: const MyHomePage(),
+        home: const SplashScreen(),
       ),
     );
   }

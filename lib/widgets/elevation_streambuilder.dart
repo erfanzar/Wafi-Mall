@@ -41,9 +41,14 @@ class ElevationDifferenceStreamBuilder extends StatelessWidget {
               switch (snap.connectionState) {
                 case ConnectionState.none:
                   return const Text(
-                      'Not connected to the stream or value == Null');
+                    'Not connected to the stream or value == Null',
+                    style: TextStyle(color: Colors.white),
+                  );
                 case ConnectionState.waiting:
-                  return const Text('awaiting interaction');
+                  return const Text(
+                    'awaiting interaction',
+                    style: TextStyle(color: Colors.white),
+                  );
                 case ConnectionState.active:
                   final double heightDiff =
                       (log((snap.data!.reading) / (pZero))) * -8434.356429;
@@ -54,10 +59,10 @@ class ElevationDifferenceStreamBuilder extends StatelessWidget {
 
                   return Column(
                     children: <Widget>[
-                      const Text('Elevation difference since last reset: ',
-                          style: TextStyle(
-                            color: Colors.black87,
-                          )),
+                      const Text(
+                        'Elevation difference since last reset: ',
+                        style: TextStyle(color: Colors.white),
+                      ),
                       const SizedBox(
                         height: 20,
                       ),
@@ -68,8 +73,8 @@ class ElevationDifferenceStreamBuilder extends StatelessWidget {
                       ),
                       Text(
                         '${displayHeightDiff}m',
-                        style: const TextStyle(
-                            color: Colors.black87, fontSize: 40),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 40),
                       ),
                       FlickeringIcon(
                         stream: _flickerStream,
@@ -126,7 +131,7 @@ class FlickeringIcon extends StatelessWidget {
                   ? Icon(
                       iconData,
                       size: 30,
-                      color: Colors.black87,
+                      color: Colors.lightGreen,
                     )
                   : Icon(
                       iconData,

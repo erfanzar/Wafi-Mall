@@ -87,7 +87,7 @@ class MyHomePageState extends State<MyHomePage> {
           pZero: provider.previousReading ?? pZero,
           flickerStream: _flickerStream,
         ),
-        buildFloors(),
+        // buildFloors(),
       ];
     }
   }
@@ -126,7 +126,7 @@ class MyHomePageState extends State<MyHomePage> {
         Positioned(
           bottom: 10,
           child: Opacity(
-            opacity: 0.9,
+            opacity: 1,
             child: Image.asset(
               'assets/images/box-360_02.gif',
               width: boxW,
@@ -135,11 +135,10 @@ class MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ),
-        testButton(),
         Positioned(
           bottom: 170,
           child: AnimatedOpacity(
-            opacity: floor >= 1 ? 0.9 : 0.4,
+            opacity: floor >= 1 ? 1 : 0.4,
             duration: const Duration(milliseconds: 200),
             child: Image.asset(
               'assets/images/box-360_02.gif',
@@ -152,7 +151,7 @@ class MyHomePageState extends State<MyHomePage> {
         Positioned(
           bottom: 2 * distance + 60,
           child: AnimatedOpacity(
-            opacity: floor >= 2 ? 0.9 : 0.4,
+            opacity: floor >= 2 ? 1 : 0.4,
             duration: const Duration(milliseconds: 200),
             child: Image.asset(
               'assets/images/box-360_02.gif',
@@ -165,7 +164,7 @@ class MyHomePageState extends State<MyHomePage> {
         Positioned(
           bottom: 3 * distance + 60,
           child: AnimatedOpacity(
-            opacity: floor >= 3 ? 0.9 : 0.4,
+            opacity: floor >= 3 ? 1 : 0.4,
             duration: const Duration(milliseconds: 200),
             child: Image.asset(
               'assets/images/box-360_02.gif',
@@ -176,23 +175,6 @@ class MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ],
-    );
-  }
-
-  Widget testButton() {
-    return ElevatedButton(
-      onPressed: () {
-        if (floor < 3) {
-          setState(() {
-            floor += 1;
-          });
-        } else if (floor == 3) {
-          setState(() {
-            floor = 0;
-          });
-        }
-      },
-      child: const Text('test'),
     );
   }
 

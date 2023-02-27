@@ -64,9 +64,9 @@ class _ElevationDifferenceStreamBuilderState
               barometerProvider.setPreviousReading(snap.data!.reading);
               flickerProvider.changingElevationDiff = heightDiff;
               //calcualte the floor
-              floor = heightDiff > 69
-                  ? (heightDiff - 69) ~/ 6.5
-                  : (heightDiff - 69) ~/ 6.5 - 1;
+              floor = heightDiff > 24
+                  ? (heightDiff - 24) ~/ 6.5
+                  : (heightDiff - 24) ~/ 6.5 - 1;
               String floorOrder = 'ground floor';
               switch (floor) {
                 case 1:

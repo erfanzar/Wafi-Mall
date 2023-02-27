@@ -101,13 +101,19 @@ class MyHomePageState extends State<MyHomePage> {
     FlickerProvider flickProvider =
         Provider.of<FlickerProvider>(context, listen: false);
     _flickerStream = flickProvider.directionStream().asBroadcastStream();
-    return Scaffold(
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children:
-              _buildBarometerDisplay(_tryStream!, pZeroMock, barometerProvider),
+    return WillPopScope(
+      onWillPop: () async {
+        SystemNavigator.pop();
+        return false;
+      },
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: _buildBarometerDisplay(
+                _tryStream!, pZeroMock, barometerProvider),
+          ),
         ),
       ),
     );

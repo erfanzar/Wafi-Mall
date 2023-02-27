@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:wafi_test/views/splash_screen.dart';
 import './data/barometer_provider.dart';
@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
     //     systemNavigationBarIconBrightness: Brightness.dark,
     //     systemNavigationBarColor: Color.fromRGBO(246, 246, 246, 1),
     //     statusBarColor: Color.fromRGBO(246, 246, 246, 1)));
-    // SystemChrome.setPreferredOrientations([
-    //   DeviceOrientation.portraitUp,
-    // ]);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: BarometerProvider()),

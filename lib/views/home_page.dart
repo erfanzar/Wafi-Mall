@@ -1,13 +1,13 @@
-import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
-
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:wafi_test/library/enviro_sensors.dart';
 import '../data/barometer_provider.dart';
 import '../data/flicker_provider.dart';
-
+// import 'package:http/http.dart' as http;
 import '../widgets/elevation_streambuilder.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -23,34 +23,37 @@ class MyHomePageState extends State<MyHomePage> {
   double pZeroMock = 1013.25;
   bool hasPlatformException = false;
   bool hasOtherError = false;
+  bool isLoading = true;
   int floor = 0;
   late double w;
   late double h;
-  patternVibrate() {
-    HapticFeedback.mediumImpact();
 
-    sleep(
-      const Duration(milliseconds: 200),
-    );
-
-    HapticFeedback.mediumImpact();
-
-    sleep(
-      const Duration(milliseconds: 500),
-    );
-
-    HapticFeedback.mediumImpact();
-
-    sleep(
-      const Duration(milliseconds: 200),
-    );
-    HapticFeedback.mediumImpact();
+  Future<double> getPressure() async {
+    final client = HttpClient();
+    final request = await client.getUrl(Uri.parse(
+        'http://api.weatherapi.com/v1/current.json?key=01636e4be0ab41a892a101404232802&q=dubai&aqi=no'));
+    final response = await request.close();
+    print('''************
+${response.statusCode.toString()}
+************
+''');
+    final contentAsString = await utf8.decodeStream(response);
+    final map = json.decode(contentAsString);
+    double? pressure = map['current']['pressure_in'] * 33.8638 + 1;
+    pressure ??= 1013.25;
+    setState(() {
+      isLoading = false;
+    });
+    return pressure;
   }
 
   @override
   void initState() {
     super.initState();
     try {
+      Future.delayed(Duration.zero, () async {
+        pZeroMock = await getPressure();
+      });
       _tryStream = barometerEvents.asBroadcastStream();
     } on PlatformException {
       hasPlatformException = true;
@@ -84,10 +87,15 @@ class MyHomePageState extends State<MyHomePage> {
       return [
         ElevationDifferenceStreamBuilder(
           pressureStream: stream,
-          pZero: provider.previousReading ?? pZero,
+          // pZero: provider.previousReading ?? pZero,
+          pZero: pZero,
           flickerStream: _flickerStream,
         ),
         // buildFloors(),
+        Text(
+          '$pZeroMock',
+          style: const TextStyle(color: Colors.white),
+        ),
       ];
     }
   }
@@ -107,14 +115,19 @@ class MyHomePageState extends State<MyHomePage> {
         return false;
       },
       child: Scaffold(
-        body: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: _buildBarometerDisplay(
-                _tryStream!, pZeroMock, barometerProvider),
-          ),
-        ),
+        body: isLoading
+            ? const Center(
+                child: CircularProgressIndicator(
+                color: Colors.white,
+              ))
+            : Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: _buildBarometerDisplay(
+                      _tryStream!, pZeroMock, barometerProvider),
+                ),
+              ),
       ),
     );
   }

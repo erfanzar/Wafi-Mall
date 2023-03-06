@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 // import 'package:enviro_sensors/enviro_sensors.dart';
-import 'package:wafi_test/library/enviro_sensors.dart';
+import 'package:wafi_test/altitude_finder/library/enviro_sensors.dart';
 import '../data/barometer_provider.dart';
 import '../data/flicker_provider.dart';
 
@@ -13,6 +13,7 @@ class ElevationDifferenceStreamBuilder extends StatefulWidget {
     @required Stream<BarometerEvent>? pressureStream,
     @required double? pZero,
     @required flickerStream,
+    required this.firstFloor,
   })  : _tryStream = pressureStream!,
         pZero = pZero!,
         _flickerStream = flickerStream,
@@ -21,6 +22,7 @@ class ElevationDifferenceStreamBuilder extends StatefulWidget {
   final Stream<BarometerEvent> _tryStream;
   final Stream<String> _flickerStream;
   final double pZero;
+  final double firstFloor;
 
   @override
   State<ElevationDifferenceStreamBuilder> createState() =>
@@ -64,9 +66,9 @@ class _ElevationDifferenceStreamBuilderState
               barometerProvider.setPreviousReading(snap.data!.reading);
               flickerProvider.changingElevationDiff = heightDiff;
               //calcualte the floor
-              floor = heightDiff > 24
-                  ? (heightDiff - 24) ~/ 6.5
-                  : (heightDiff - 24) ~/ 6.5 - 1;
+              floor = heightDiff > widget.firstFloor
+                  ? (heightDiff - widget.firstFloor) ~/ 6.5
+                  : (heightDiff - widget.firstFloor) ~/ 6.5 - 1;
               String floorOrder = 'ground floor';
               switch (floor) {
                 case 1:
@@ -119,7 +121,7 @@ class _ElevationDifferenceStreamBuilderState
                         child: Opacity(
                           opacity: 1,
                           child: Image.asset(
-                            'assets/images/box-360_02.gif',
+                            'assets/images/floors/box-360_02.gif',
                             width: boxW,
                             height: boxH,
                             fit: BoxFit.fitWidth,
@@ -132,7 +134,7 @@ class _ElevationDifferenceStreamBuilderState
                           opacity: floor >= 1 ? 1 : 0.4,
                           duration: const Duration(milliseconds: 200),
                           child: Image.asset(
-                            'assets/images/box-360_02.gif',
+                            'assets/images/floors/box-360_02.gif',
                             width: boxW,
                             height: boxH,
                             fit: BoxFit.fitWidth,
@@ -145,7 +147,7 @@ class _ElevationDifferenceStreamBuilderState
                           opacity: floor >= 2 ? 1 : 0.4,
                           duration: const Duration(milliseconds: 200),
                           child: Image.asset(
-                            'assets/images/box-360_02.gif',
+                            'assets/images/floors/box-360_02.gif',
                             width: boxW,
                             height: boxH,
                             fit: BoxFit.fitWidth,
@@ -158,7 +160,7 @@ class _ElevationDifferenceStreamBuilderState
                           opacity: floor >= 3 ? 1 : 0.4,
                           duration: const Duration(milliseconds: 200),
                           child: Image.asset(
-                            'assets/images/box-360_02.gif',
+                            'assets/images/floors/box-360_02.gif',
                             width: boxW,
                             height: boxH,
                             fit: BoxFit.fitWidth,

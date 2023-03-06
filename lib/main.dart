@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:wafi_test/views/splash_screen.dart';
-import './data/barometer_provider.dart';
-import './data/flicker_provider.dart';
+import 'altitude_finder/data/barometer_provider.dart';
+import 'altitude_finder/data/flicker_provider.dart';
 
 void main() => runApp(const MyApp());
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wafi_test/views/welcome_page.dart';
+import 'select_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -9,11 +9,17 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  bool isVisible = true;
   @override
   void initState() {
-    Future.delayed(const Duration(milliseconds: 7400), () {
+    Future.delayed(const Duration(milliseconds: 7400), () async {
+      setState(() {
+        isVisible = false;
+      });
+      await Future.delayed(const Duration(microseconds: 500));
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => const WelcomePage()));
+          context, MaterialPageRoute(builder: (_) => const SelectPage()));
     });
     super.initState();
   }
@@ -21,13 +27,17 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: Image.asset('assets/images/final_color.gif',
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            fit: BoxFit.fill),
+      body: AnimatedOpacity(
+        duration: const Duration(milliseconds: 400),
+        opacity: isVisible ? 1 : 0,
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: Image.asset('assets/images/final_color.gif',
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              fit: BoxFit.fill),
+        ),
       ),
     );
   }

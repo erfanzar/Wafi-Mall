@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 import 'package:wafi_test/altitude_finder/altitude_page.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -31,10 +31,10 @@ class _WelcomePageState extends State<WelcomePage> {
             SizedBox(
                 height: h / 8,
                 width: w / 1.4,
-                child: Center(
+                child: const Center(
                   child: Text(
                     'Welcome To Test Application \n Of Checking Floors in Wafi Mall',
-                    style: GoogleFonts.montserratAlternates(
+                    style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.w500),
                     textAlign: TextAlign.center,
                   ),
@@ -74,10 +74,10 @@ class _WelcomePageState extends State<WelcomePage> {
                                 blurRadius: 15),
                       ],
                       borderRadius: BorderRadius.circular(50)),
-                  child: Center(
+                  child: const Center(
                     child: Text(
                       'Lets Go !',
-                      style: GoogleFonts.montserratAlternates(
+                      style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.w500),
                       textAlign: TextAlign.center,
                     ),

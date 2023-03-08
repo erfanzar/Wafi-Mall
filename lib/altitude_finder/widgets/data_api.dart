@@ -11,21 +11,17 @@ Future handledAPI() async {
       try {
         data = await _getAPI().timeout(const Duration(seconds: 2));
         if (data == null) {
-          print('null error');
           continue;
         } else {
           break;
         }
       } on TimeoutException {
-        print('timeout error');
         data = null;
         continue;
       } catch (e) {
         data = null;
-        print('other error!');
       }
     } else {
-      print('connection failed');
       break;
     }
   }

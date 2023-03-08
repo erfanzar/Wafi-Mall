@@ -73,14 +73,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
-  enviro_sensors:
-    dependency: "direct main"
-    description:
-      name: enviro_sensors
-      sha256: "583a3a832d5a0eacf6047e580ec39cfc64e562fa5ddfa3dfccfef9ce72c22854"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1"
   fake_async:
     dependency: transitive
     description:
@@ -132,7 +124,7 @@ packages:
     source: hosted
     version: "4.0.3"
   http:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: http
       sha256: "6aa2946395183537c8b880962d935877325d6a09a2867c3970c05c0fed6ac482"

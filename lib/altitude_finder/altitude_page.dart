@@ -97,35 +97,29 @@ class MyHomePageState extends State<MyHomePage> {
     FlickerProvider flickProvider =
         Provider.of<FlickerProvider>(context, listen: false);
     _flickerStream = flickProvider.directionStream().asBroadcastStream();
-    return WillPopScope(
-      onWillPop: () async {
-        SystemNavigator.pop();
-        return false;
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: Text(
-            '$pZeroMock',
-            style: TextStyle(color: Colors.white.withOpacity(0.3)),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text(
+          '$pZeroMock',
+          style: TextStyle(color: Colors.white.withOpacity(0.3)),
         ),
-        body: isLoading
-            ? const Center(
-                child: CircularProgressIndicator(
-                color: Colors.white,
-              ))
-            : Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: _buildBarometerDisplay(
-                      _tryStream!, pZeroMock, barometerProvider),
-                ),
-              ),
       ),
+      body: isLoading
+          ? const Center(
+              child: CircularProgressIndicator(
+              color: Colors.white,
+            ))
+          : Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: _buildBarometerDisplay(
+                    _tryStream!, pZeroMock, barometerProvider),
+              ),
+            ),
     );
   }
 

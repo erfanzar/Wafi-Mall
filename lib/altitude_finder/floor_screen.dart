@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 
 class ScreenFloorPage extends StatefulWidget {
   const ScreenFloorPage({Key? key}) : super(key: key);
@@ -47,7 +47,7 @@ class _ScreenFloorPageState extends State<ScreenFloorPage> {
               Center(
                 child: Text(
                   'Floor $floor',
-                  style: GoogleFonts.montserratAlternates(
+                  style: const TextStyle(
                       color: Colors.white, fontWeight: FontWeight.w500),
                   textAlign: TextAlign.center,
                 ),

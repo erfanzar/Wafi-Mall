@@ -20,15 +20,27 @@ class _NeoButtonState extends State<NeoButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async {
+      onTapDown: (_) {
         setState(() {
           isPressed = true;
         });
-        await Future.delayed(const Duration(milliseconds: 210));
+      },
+      onTapUp: (_) async {
+        await Future.delayed(const Duration(milliseconds: 50));
+
         setState(() {
           isPressed = false;
         });
-        await Future.delayed(const Duration(milliseconds: 190));
+      },
+      onTapCancel: () async {
+        await Future.delayed(const Duration(milliseconds: 50));
+
+        setState(() {
+          isPressed = false;
+        });
+      },
+      onTap: () async {
+        await Future.delayed(const Duration(milliseconds: 150));
         if (widget.routeTarget != null) {
           // ignore: use_build_context_synchronously
           Navigator.push(
@@ -36,8 +48,7 @@ class _NeoButtonState extends State<NeoButton> {
         }
       },
       child: AnimatedContainer(
-        // curve: Curves.easeInOutCirc,
-        duration: const Duration(milliseconds: 210),
+        duration: const Duration(milliseconds: 150),
         height: isPressed ? widget.diameter * 0.995 : widget.diameter,
         width: isPressed ? widget.diameter * 0.995 : widget.diameter,
         decoration: BoxDecoration(

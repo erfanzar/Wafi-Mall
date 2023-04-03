@@ -59,6 +59,7 @@ class _ElevationDifferenceStreamBuilderState
                 'awaiting interaction',
                 style: TextStyle(color: Colors.white),
               );
+
             case ConnectionState.active:
               final double heightDiff =
                   (log((snap.data!.reading) / (widget.pZero))) * -8434.356429;

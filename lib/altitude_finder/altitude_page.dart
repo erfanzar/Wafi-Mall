@@ -42,6 +42,9 @@ class MyHomePageState extends State<MyHomePage> {
             firstFloor = apiData[1];
           });
         }
+        if (apiData == null) {
+          pZeroMock = 1013.251;
+        }
         setState(() {
           isLoading = false;
         });
@@ -103,7 +106,7 @@ class MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
-          '$pZeroMock',
+          pZeroMock == 1013.251 ? 'connection failed' : '$pZeroMock',
           style: TextStyle(color: Colors.white.withOpacity(0.3)),
         ),
       ),

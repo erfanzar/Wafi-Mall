@@ -70,7 +70,19 @@ class _SelectPageState extends State<SelectPage> {
       body: AnimatedOpacity(
         duration: const Duration(milliseconds: 400),
         opacity: isVisible ? 1 : 0,
-        child: _buildButtons(),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.deepPurple.shade900.withOpacity(0.1),
+                Theme.of(context).scaffoldBackgroundColor,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: _buildButtons(),
+        ),
       ),
     );
   }
